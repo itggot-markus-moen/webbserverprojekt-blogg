@@ -18,7 +18,7 @@ post('/login') do
    
     username_db = db.execute("SELECT Username from Users WHERE Username = (?)", username)
     password_db = db.execute("SELECT Password from Users WHERE Username = (?)", username)
-    if username_db != nil && password_db != nil
+    if username_db[0] != nil && password_db[0] != nil
         username_db = username_db[0][0]
         password_db = password_db[0][0]
     else
