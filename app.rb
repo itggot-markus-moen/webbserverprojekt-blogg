@@ -61,3 +61,8 @@ post('/newuser') do
 
     redirect('/')
 end
+
+post('/log_out') do
+    session.destroy
+    redirect('/')
+end
