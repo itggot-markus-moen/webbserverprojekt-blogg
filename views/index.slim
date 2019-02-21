@@ -8,6 +8,8 @@ form action="/login" method="POST"
 -if session[:account]["logged_in"] == false
     p Username or password is incorrecto!
 
+p = session[:account]["User_Id"]
+
 p
     a href="/register" Create Account
 

@@ -32,6 +32,7 @@ post('/login') do
         if BCrypt::Password.new(password_db) == password
             session[:account]["logged_in"] = true
             session[:account]["Username"] = username
+            session[:account]["User_Id"] = db.execute("Select User_Id from Users WHERE Username = ?", username)
             redirect("/granted")
         end
     end
@@ -71,4 +72,13 @@ end
 post('/log_out') do
     session[:account] = nil
     redirect('/')
+end
+
+get('/bloghome') do
+    db = SQLite3::Database.new('db/blogg.db')
+    db.results_as_hash = true
+
+    info = db.execute("Select Blog_Id, Title from Blogs WHERE User_Id = ?", session[:account]["User_Id"])
+
+    slim(:bloghome, locals:{blog:info})
 end
