@@ -6,6 +6,9 @@ require "bcrypt"
 enable :sessions
 
 get('/') do
+    if session[:account] == nil
+        session[:account] = {}
+    end
     slim(:index)
 end
 
@@ -22,19 +25,22 @@ post('/login') do
         username_db = username_db[0][0]
         password_db = password_db[0][0]
     else
-        redirect("/denied")
+        session[:account]["logged_in"] = false
+        redirect("/")
     end    
     if username_db == username
         if BCrypt::Password.new(password_db) == password
-            session["logged_in"] = true
+            session[:account]["logged_in"] = true
+            session[:account]["Username"] = username
             redirect("/granted")
         end
     end
-    redirect("/denied")
+    session[:account]["logged_in"] = false
+    redirect("/")
 end
 
 get('/granted') do
-    if session["logged_in"] == true
+    if session[:account]["logged_in"]
         slim(:granted)
     else
         redirect('/denied')
@@ -63,6 +69,6 @@ post('/newuser') do
 end
 
 post('/log_out') do
-    session.destroy
+    session[:account] = nil
     redirect('/')
 end

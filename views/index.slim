@@ -5,8 +5,19 @@ form action="/login" method="POST"
     input name="Password" placeholder="Password" type="password"
     input value="Log In" type="submit"
 
+-if session[:account]["logged_in"] == false
+    p Username or password is incorrecto!
+
 p
     a href="/register" Create Account
 
+-if session[:account]["logged_in"] == true
     form action="/log_out" method="POST"
         input type="submit" value="Log Out"
+
+
+/ form method="POST"
+/     input name="Username" placeholder="Username" type="text"
+/     input name="Password" placeholder="Password" type="password"
+/     input  formaction="/login" value="Log In" type="submit"
+/     input  formaction="/register" value="register" type="submit"
