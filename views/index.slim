@@ -8,10 +8,14 @@ form action="/login" method="POST"
 -if session[:account]["logged_in"] == false
     p Username or password is incorrecto!
 
-p = session[:account]["User_Id"]
+/ p = session[:account]["User_Id"][0]["User_Id"]
 
-p
-    a href="/register" Create Account
+-if session[:account]["logged_in"] != true
+    p
+        a href="/register" Create Account
+
+-if session[:account]["logged_in"] == true
+    p = "Currently logged in as #{session[:account]["Username"]}"
 
 -if session[:account]["logged_in"] == true
     form action="/log_out" method="POST"

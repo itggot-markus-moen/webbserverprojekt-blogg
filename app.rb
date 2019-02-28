@@ -78,7 +78,7 @@ get('/bloghome') do
     db = SQLite3::Database.new('db/blogg.db')
     db.results_as_hash = true
 
-    info = db.execute("Select Blog_Id, Title from Blogs WHERE User_Id = ?", session[:account]["User_Id"])
+    info = db.execute("Select Blog_Id, Title from Blogs WHERE User_Id = ?", session[:account]["User_Id"][0]["User_Id"])
 
-    slim(:bloghome, locals:{blog:info})
+    slim(:bloghome, locals:{blog:info.first})
 end
