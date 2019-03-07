@@ -81,7 +81,7 @@ get('/bloghome') do
     info = db.execute("Select Blog_Id, Title from Blogs WHERE User_Id = ?", session[:account]["User_Id"][0]["User_Id"])
     info = info[0]
     session[:account]["Blog_Id"] = info["Blog_Id"]
-    data = db.execute("SELECT Title, Text FROM Posts Where Blog_Id == ?", session[:account]["Blog_Id"])
+    data = db.execute("SELECT Title, Text, Post_Id FROM Posts Where Blog_Id == ?", session[:account]["Blog_Id"])
     info["Data"] = data
 
     slim(:bloghome, locals:{info:info})
@@ -112,6 +112,17 @@ post('/post') do
     title = params["Title"]
     text = params["Text"]
     db.execute("INSERT INTO Posts(Title, Text, Blog_Id) VALUES(?, ?, ?)", title, text, session[:account]["Blog_Id"])
+
+    redirect('/bloghome')
+end
+
+post('/delete') do
+    db = SQLite3::Database.new('db/blogg.db')
+    db.results_as_hash = true
+
+    id = params["Post_Id"]
+
+    db.execute("DELETE FROM Posts where Post_Id == ?", id)
 
     redirect('/bloghome')
 end
