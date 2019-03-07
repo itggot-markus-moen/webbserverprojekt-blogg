@@ -82,3 +82,17 @@ get('/bloghome') do
 
     slim(:bloghome, locals:{info:info.first})
 end
+
+get('/blogmake') do
+    slim(:blogmake)
+end
+
+post('/newblog') do
+    db = SQLite3::Database.new('db/blogg.db')
+    db.results_as_hash = true
+
+    title = params["Title"]
+    db.execute("INSERT INTO Blogs(Title, User_Id) VALUES(?, ?)", title, session[:account]["User_Id"][0]["User_Id"])
+
+    redirect('/bloghome')
+end

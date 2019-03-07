@@ -15,11 +15,11 @@ form action="/login" method="POST"
         a href="/register" Create Account
 
 -if session[:account]["logged_in"] == true
-    p = "Currently logged in as #{session[:account]["Username"]}"
+        a href="/bloghome" Go to my blog
+        p = "Currently logged in as #{session[:account]["Username"]}"
 
--if session[:account]["logged_in"] == true
-    form action="/log_out" method="POST"
-        input type="submit" value="Log Out"
+        form action="/log_out" method="POST"
+                input type="submit" value="Log Out"
 
 
 / form method="POST"

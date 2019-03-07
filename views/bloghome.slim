@@ -1,4 +1,6 @@
-/ -info.each do |e|
-/     p = "#{e["Blog_Id"]} #{e["Title"]}"
+-if info != nil
+    h1 = "#{info["Title"]}"
 
-p = "#{info}"
+-else
+    p = "Whoops, there's nothing here #{session[:account]["Username"]}..."
+    a href="/blogmake" Get started
