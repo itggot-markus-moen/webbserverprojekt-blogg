@@ -80,5 +80,5 @@ get('/bloghome') do
 
     info = db.execute("Select Blog_Id, Title from Blogs WHERE User_Id = ?", session[:account]["User_Id"][0]["User_Id"])
 
-    slim(:bloghome, locals:{blog:info.first})
+    slim(:bloghome, locals:{info:info.first})
 end
