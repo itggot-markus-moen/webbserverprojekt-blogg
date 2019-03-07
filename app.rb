@@ -116,6 +116,10 @@ post('/post') do
     redirect('/bloghome')
 end
 
+post('/edit') do
+    
+end
+
 post('/delete') do
     db = SQLite3::Database.new('db/blogg.db')
     db.results_as_hash = true
