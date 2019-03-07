@@ -1,5 +1,14 @@
+a href="/" Back
+
 -if info != nil
     h1 = "#{info["Title"]}"
+
+    -users.each do |e|
+        h1 = "#{e["Title"]}"
+        p = "#{e["Text"]}"
+        / a href="/list/#{e["id"]}" See User
+
+    a href="/makepost" Make a post
 
 -else
     p = "Whoops, there's nothing here #{session[:account]["Username"]}..."

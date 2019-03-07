@@ -79,6 +79,7 @@ get('/bloghome') do
     db.results_as_hash = true
 
     info = db.execute("Select Blog_Id, Title from Blogs WHERE User_Id = ?", session[:account]["User_Id"][0]["User_Id"])
+    session[:account]["Blog_Id"] = info[0]["Blog_Id"]
 
     slim(:bloghome, locals:{info:info.first})
 end
@@ -93,6 +94,21 @@ post('/newblog') do
 
     title = params["Title"]
     db.execute("INSERT INTO Blogs(Title, User_Id) VALUES(?, ?)", title, session[:account]["User_Id"][0]["User_Id"])
+
+    redirect('/bloghome')
+end
+
+get('/makepost') do
+    slim(:post)
+end
+
+post('/post') do
+    db = SQLite3::Database.new('db/blogg.db')
+    db.results_as_hash = true
+
+    title = params["Title"]
+    text = params["Text"]
+    db.execute("INSERT INTO Posts(Title, Text, Blog_Id) VALUES(?, ?, ?)", title, text, session[:account]["Blog_Id"])
 
     redirect('/bloghome')
 end
