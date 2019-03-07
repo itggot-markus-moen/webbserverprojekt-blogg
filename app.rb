@@ -79,9 +79,12 @@ get('/bloghome') do
     db.results_as_hash = true
 
     info = db.execute("Select Blog_Id, Title from Blogs WHERE User_Id = ?", session[:account]["User_Id"][0]["User_Id"])
-    session[:account]["Blog_Id"] = info[0]["Blog_Id"]
+    info = info[0]
+    session[:account]["Blog_Id"] = info["Blog_Id"]
+    data = db.execute("SELECT Title, Text FROM Posts Where Blog_Id == ?", session[:account]["Blog_Id"])
+    info["Data"] = data
 
-    slim(:bloghome, locals:{info:info.first})
+    slim(:bloghome, locals:{info:info})
 end
 
 get('/blogmake') do

@@ -3,8 +3,8 @@ a href="/" Back
 -if info != nil
     h1 = "#{info["Title"]}"
 
-    -users.each do |e|
-        h1 = "#{e["Title"]}"
+    -info["Data"].each do |e|
+        h3 = "#{e["Title"]}"
         p = "#{e["Text"]}"
         / a href="/list/#{e["id"]}" See User
 
