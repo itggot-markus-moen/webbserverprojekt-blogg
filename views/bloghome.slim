@@ -6,8 +6,10 @@ a href="/" Back
     -info["Data"].each do |e|
         h3 = "#{e["Title"]}"
         p = "#{e["Text"]}"
-        form action="/denied" method="POST"
-            input type="submit" value="Edit post"
+        / form action="/edit" method="POST"
+        /     input type="hidden" name="Post_Id" value="#{e["Post_Id"]}"
+        /     input type="submit" value="Edit post"
+        a href="/editpost/#{e["Post_Id"]}" Edit Post
         form action="/delete" method="POST"
             input type="hidden" name="Post_Id" value="#{e["Post_Id"]}"
             input type="submit" value="Delete post"

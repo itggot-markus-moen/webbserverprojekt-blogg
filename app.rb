@@ -118,8 +118,22 @@ post('/post') do
     redirect('/bloghome')
 end
 
+get('/editpost/:id') do
+    id = params["id"]
+    slim(:edit, locals:{post_id:id})
+end
+
 post('/edit') do
-    
+    db = SQLite3::Database.new('db/blogg.db')
+    db.results_as_hash = true
+
+    title = params["Title"]
+    text = params["Text"]
+    post_id = params["Post_Id"]
+
+    db.execute("UPDATE Posts SET Title=?, Text=? WHERE Post_Id=?", title, text, post_id)
+
+    redirect('/bloghome')
 end
 
 post('/delete') do
