@@ -1,7 +1,8 @@
 a href="/bloghome" Back
 
 -if posts != nil && posts != []
-    -posts.each do |e|
-        h1 = e[0]
+    -posts.reverse.each do |e|
+        h2 = e[0]
         p = e["Text"]
         h4 = "By: #{e["Title"]}"
+        <br>

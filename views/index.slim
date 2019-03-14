@@ -1,14 +1,13 @@
-h1 Why ain't this in hotpink!?!
+h1 Ultimate bloging!
 
-form action="/login" method="POST"
-    input name="Username" placeholder="Username" type="text"
-    input name="Password" placeholder="Password" type="password"
-    input value="Log In" type="submit"
+-if session[:account]["logged_in"] != true
+        form action="/login" method="POST"
+                input name="Username" placeholder="Username" type="text"
+                input name="Password" placeholder="Password" type="password"
+                input value="Log In" type="submit"
 
 -if session[:account]["logged_in"] == false
     p Username or password is incorrecto!
-
-/ p = session[:account]["User_Id"][0]["User_Id"]
 
 -if session[:account]["logged_in"] != true
     p
@@ -20,10 +19,3 @@ form action="/login" method="POST"
 
         form action="/log_out" method="POST"
                 input type="submit" value="Log Out"
-
-
-/ form method="POST"
-/     input name="Username" placeholder="Username" type="text"
-/     input name="Password" placeholder="Password" type="password"
-/     input  formaction="/login" value="Log In" type="submit"
-/     input  formaction="/register" value="register" type="submit"
