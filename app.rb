@@ -152,6 +152,6 @@ get('/viewall') do
     db.results_as_hash = true
 
     posts = db.execute("SELECT Posts.Title, Posts.Text, Blogs.Title FROM Posts INNER JOIN Blogs ON Blogs.Blog_Id = Posts.Blog_Id")
-        p posts
+
     slim(:viewall, locals:{posts:posts})
 end
